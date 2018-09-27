@@ -35545,7 +35545,7 @@ var Add = function (_React$Component) {
 		_this.onClick = _this.onClick.bind(_this);
 		_this.handleTextChange = _this.handleTextChange.bind(_this);
 		_this.insertNewExpense = _this.insertNewExpense.bind(_this);
-		_this.openModel = _this.openModal.bind(_this);
+		_this.openModal = _this.openModal.bind(_this);
 		_this.closeModal = _this.closeModal.bind(_this);
 		return _this;
 	}

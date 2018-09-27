@@ -21,7 +21,7 @@ class Add extends React.Component {
 		this.onClick = this.onClick.bind(this);
 		this.handleTextChange = this.handleTextChange.bind(this);
 		this.insertNewExpense = this.insertNewExpense.bind(this);
-		this.openModel = this.openModal.bind(this);
+		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
 	}
 	openModal() {
