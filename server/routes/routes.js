@@ -16,12 +16,12 @@ router.route('/insert')
 	expense.month = req.body.month;
 	expense.year = req.body.year;
 	
-expense.save(function(err) {
-	if (err) {
-		res.send(err);
-	}
-	res.send('Expense successfully added!');
-});
+	Expense.save(function(err) {
+		if (err) {
+			res.send(err);
+		}
+		res.send('Expense successfully added!');
+	});
 });
 
 router.route('/update')

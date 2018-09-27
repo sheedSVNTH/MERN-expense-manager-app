@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
 
-mongoose.connect('mongodb://rasheedkm:#Element8@ds137149.mlab.com:37149/expenses');
+mongoose.connect('mongodb://<rasheedkm>:<#Element8>@ds137149.mlab.com:37149/expenses');
 //Source link from Mlab
 //mongodb://<dbuser>:<dbpassword>@ds137149.mlab.com:37149/expenses
 
