@@ -1,9 +1,11 @@
 import React from 'react';
-import {Button} from 'react-bootstrap';
 import Modal from 'react-modal';
 import axios from 'axios';
+import {Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 var querystring = require('querystring');
+	
+Modal.setAppElement('#root');
 
 class Add extends React.Component {
 	constructor() {
@@ -17,10 +19,10 @@ class Add extends React.Component {
 			modalIsOpen: false
 		}
 		
+		this.insertNewExpense = this.insertNewExpense.bind(this);
 		this.handleSelectChange = this.handleSelectChange.bind(this);
 		this.onClick = this.onClick.bind(this);
 		this.handleTextChange = this.handleTextChange.bind(this);
-		this.insertNewExpense = this.insertNewExpense.bind(this);
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
 	}
@@ -40,10 +42,8 @@ class Add extends React.Component {
 	
 	componentDidMount() {
       this.setState({
-        month: this.props.selectedMonth
-      });
-      this.setState({
-        year: this.props.selectedYear
+        month: this.props.selectedMonth,
+		year: this.props.selectedYear
       });
     }
 	
@@ -62,6 +62,7 @@ class Add extends React.Component {
 	
 	onClick(e) {
 		this.insertNewExpense(this);
+		console.log('hellow form onclick');
 	}
 	
 	insertNewExpense(e) {
@@ -78,6 +79,8 @@ class Add extends React.Component {
 			e.setState({
 				messageFromServer: response.data
 			});
+			console.log("hello", response.data);
+		 console.log('hellow from insdie insertNewExpense');
 		});
 	}
 	handleTextChange(e) {
@@ -92,8 +95,8 @@ class Add extends React.Component {
         });
       }
     }
-	
-	
+
+
 	render() {
 		if(this.state.messageFromServer == '') {
 			return(
@@ -103,7 +106,7 @@ class Add extends React.Component {
 					</Button>
 					<Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Add Expense" className="Modal">
 						<Link to={{pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
-						<Button bsStyle="danger" bsSize="mini" onClick={this.closeModal}>
+						<Button bsStyle="danger" bsSize="small" onClick={this.closeModal}>
 							<span className="closebtn glyphicon glyphicon-remove"></span>
 						</Button>
 						</Link><br/>
@@ -156,7 +159,7 @@ class Add extends React.Component {
 		   <div className='button-center'>
 		   <h3>{this.state.messageFromServer}</h3>
 		   <Link to={{pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
-		   <Button bsStyle="success" bsSize="mini" onClick={this.closeModal}>Close the Dialog</Button>
+		   <Button bsStyle="success" bsSize="small" onClick={this.closeModal}>Close the Dialog</Button>
 		   </Link>
 		   </div>
 		   </Modal>

@@ -16,9 +16,9 @@ router.route('/insert')
 	expense.month = req.body.month;
 	expense.year = req.body.year;
 	
-	Expense.save(function(err) {
+	expense.save(function(err) {
 		if (err) {
-			res.send(err);
+			res.send("you have an error", err);
 		}
 		res.send('Expense successfully added!');
 	});
