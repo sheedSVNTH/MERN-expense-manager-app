@@ -27,7 +27,7 @@ router.route('/insert')
 router.route('/update')
 .post(function(req, res) {
 	const doc = {
-		description: req.body.description,
+		description: req.body.desc,
 		amount: req.body.amount,
 		month: req.body.month,
 		year: req.body.year

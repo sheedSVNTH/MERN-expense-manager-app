@@ -63,7 +63,7 @@ class Update extends React.Component {
 		}	
 	}
 	
-		handleTextChange(e) {
+	handleTextChange(e) {
       if (e.target.name == "description") {
         this.setState({
           description: e.target.value
