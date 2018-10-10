@@ -50,6 +50,15 @@ class Update extends React.Component {
       });
     }
 	
+	componentWillReceiveProps(nextProps){
+    this.setState({
+      id: nextProps.expense._id,
+      description: nextProps.expense.description,
+      month:nextProps.expense.month,
+      year:nextProps.expense.year
+    })
+  }
+	
 	handleSelectChange(e) {
 		if (e.target.name == 'month') {
 			this.setState({
@@ -98,7 +107,6 @@ class Update extends React.Component {
 		});
 	}
 	
-	
 	render() {
     if(this.state.messageFromServer == ''){
       return (
@@ -109,7 +117,7 @@ class Update extends React.Component {
             onRequestClose={this.closeModal}
             contentLabel="Add Expense"
             className="Modal">
-		  <Link to={{pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
+		  <Link to={{pathname: '/', search: '?month='+this.state.month+'&year='+this.state.year }} style={{ textDecoration: 'none' }}>
             <Button bsStyle="danger" bsSize="small" onClick={this.closeModal}><span className="closebtn glyphicon glyphicon-remove"></span></Button>
           </Link><br/>
 		  <fieldset>
@@ -132,8 +140,8 @@ class Update extends React.Component {
            </select>
             <label for="year">Year:</label>
 		  <select id="year" name="year" value={this.state.year} onChange={this.handleSelectChange}>
-                      <option value="2015" id="17">2015</option>
-                      <option value="2016" id="17">2016</option>
+                      <option value="2015" id="15">2015</option>
+                      <option value="2016" id="16">2016</option>
                       <option value="2017" id="17">2017</option>
                       <option value="2018" id="18">2018</option>
                       <option value="2019" id="19">2019</option>
@@ -161,7 +169,7 @@ class Update extends React.Component {
            className="Modal">
 		  <div className='button-center'>
               <h3>{this.state.messageFromServer}</h3>
-              <Link to={{pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
+              <Link to={{pathname: '/', search: '?month='+this.state.month+'&year='+this.state.year}} style={{ textDecoration: 'none' }}>
                 <Button bsStyle="success" bsSize="small" onClick={this.closeModal}>Close the Dialog</Button>
               </Link>
 		  </div>

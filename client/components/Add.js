@@ -41,10 +41,23 @@ class Add extends React.Component {
 	}
 	
 	componentDidMount() {
-      this.setState({
-        month: this.props.selectedMonth,
+      if(this.props.selectedMonth == 'All') {
+		  this.setState({month: 'Jan'});
+	  } else {
+		  this.setState({month: this.props.selectedMonth});
+	  }
+		this.setState({
 		year: this.props.selectedYear
       });
+    }
+	
+	componentWillReceiveProps(nextProps){
+      if(this.props.selectedMonth == 'All'){
+        this.setState({month: 'Jan'});
+      }else{
+        this.setState({month: this.props.selectedMonth});
+      }
+		this.setState({year:nextProps.selectedYear});
     }
 	
 	handleSelectChange(e) {
@@ -62,7 +75,6 @@ class Add extends React.Component {
 	
 	onClick(e) {
 		this.insertNewExpense(this);
-		console.log('hellow form onclick');
 	}
 	
 	insertNewExpense(e) {
@@ -79,8 +91,6 @@ class Add extends React.Component {
 			e.setState({
 				messageFromServer: response.data
 			});
-			console.log("hello", response.data);
-		 console.log('hellow from insdie insertNewExpense');
 		});
 	}
 	handleTextChange(e) {
@@ -105,7 +115,7 @@ class Add extends React.Component {
 						<span className="glyphicon glyphicon-plus"></span>
 					</Button>
 					<Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Add Expense" className="Modal">
-						<Link to={{pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
+						<Link to={{pathname: '/', search: '?month='+this.state.month+'&year='+this.state.year }} style={{ textDecoration: 'none' }}>
 						<Button bsStyle="danger" bsSize="small" onClick={this.closeModal}>
 							<span className="closebtn glyphicon glyphicon-remove"></span>
 						</Button>
@@ -158,14 +168,14 @@ class Add extends React.Component {
 		   <Modal isOpen={this.state.modalIsOpen} onAfterOpen={this.afterOpenModal} onRequestClose={this.closeModal} contentLabel="Add Expense" className="Modal">
 		   <div className='button-center'>
 		   <h3>{this.state.messageFromServer}</h3>
-		   <Link to={{pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
+		   <Link to={{pathname: '/', search: '?month='+this.state.month+'&year='+this.state.year}} style={{ textDecoration: 'none' }}>
 		   <Button bsStyle="success" bsSize="small" onClick={this.closeModal}>Close the Dialog</Button>
 		   </Link>
 		   </div>
 		   </Modal>
 		   </div>
 	   )
-   }
+   	}
 	}	
 }
 

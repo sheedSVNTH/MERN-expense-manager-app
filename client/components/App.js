@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+
 import Add from './Add';
 import Update from './Update';
 import Delete from './Delete';
+
+import { Tab, Tabs } from 'react-bootstrap';
+import YearTabsRouter from './tabs/yearTabsRouter';
+import MonthTabs from './tabs/monthTabs';
 
 import '../css/App.css';
 
@@ -11,24 +16,44 @@ export default class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			selectedMonth: 'Jan',
+			selectedMonth: 'All',
 			selectedYear: 2018,
-			data: []
+			data: [],
+			activeTab: 2018
 					 };
 		this.getData = this.getData.bind(this);
 	}
 		
-		componentDidMount(){
-			this.getData(this, '2018');
-		}
 		componentWillReceiveProps(nextProps) {
-			this.getData(this, '2018');
+			if(nextProps.history.location.search) {
+				var search = nextProps.history.location.search;
+				search = search.substring(1);
+				var searchObj = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+				this.setState({activeTab: parseInt(searchObj.year)});
+    			this.setState({selectedYear: searchObj.year});
+				this.setState({selectedMonth: searchObj.month});
+				this.getData(this, searchObj.year, searchObj.month);
+			} else {
+			this.getData(this, 2018, 'All');
+			}
 		}
-		getData(ev, year){
-			axios.get('/getAll?month=All&year='+year)
+	
+		componentDidMount(){
+			this.getData(this, 2018, 'All');
+		}
+
+		handleSelect(selectedTab) {
+		 this.setState({
+		   activeTab: selectedTab,
+		   selectedYear: selectedTab
+		 });
+	  	}
+			getData(ev, year, month){
+			axios.get('/getAll?month='+month+'&year='+year)
 			.then(function(response) {
 				ev.setState({data: response.data});
 				ev.setState({selectedYear: parseInt(year)});
+				ev.setState({selectedMonth: month});
 			});
 		}
 	
@@ -36,6 +61,13 @@ export default class App extends React.Component {
 	render() {
 		return (
 		  <div>
+			<Tabs activeKey={this.state.activeTab} onSelect={this.handleSelect}>
+			  <Tab eventKey={2018} title={<YearTabsRouter year='2018'/>}><MonthTabs year='2018' monthlyActiveTab={this.state.selectedMonth}/></Tab>
+			  <Tab eventKey={2019} title={<YearTabsRouter year='2019'/>}><MonthTabs year='2019' monthlyActiveTab={this.state.selectedMonth}/></Tab>
+			  <Tab eventKey={2020} title={<YearTabsRouter year='2020'/>}><MonthTabs year='2020' monthlyActiveTab={this.state.selectedMonth}/></Tab>
+			  <Tab eventKey={2021} title={<YearTabsRouter year='2021' />}><MonthTabs year='2021' monthlyActiveTab={this.state.selectedMonth}/></Tab>
+			  <Tab eventKey={2022} title={<YearTabsRouter year='2022' />}><MonthTabs year='2022' monthlyActiveTab={this.state.selectedMonth}/></Tab>
+        	</Tabs>
 			<Add selectedMonth={this.state.selectedMonth} selectedYear={this.state.selectedYear} />
 			<table>
 			  <thead>

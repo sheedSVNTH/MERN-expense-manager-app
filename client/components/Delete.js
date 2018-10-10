@@ -8,18 +8,29 @@ class Delete extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			id: ''
-		}
-		
+			id: '',
+			month: '',
+			year: ''
+		};
 		this.delete = this.delete.bind(this);
 		this.onClick = this.onClick.bind(this);
 	}
 	
 	componentDidMount() {
 		this.setState({
-			id: this.props.expense._id
+			id: this.props.expense._id,
+			month: this.props.expense.month,
+			year: this.props.expense.year
 		})
 	}
+	
+	componentWillReceiveProps(nextProps){
+  		this.setState({
+			id: nextProps.expense._id,
+			month:nextProps.expense.month,
+			year:nextProps.expense.year
+  		})
+  	}
 	
 	onClick(e) {
 		this.delete(this);
@@ -28,14 +39,13 @@ class Delete extends React.Component {
 	delete(e) {
 		axios.get('/delete?id='+e.state.id)
 		.then(function(response) {
-			  
-			  });
+		});
 	}
 
 render(){
   return (
 	  <Button bsStyle="danger" bsSize="small" onClick={this.onClick}>
-	  <Link to={{pathname: '/', search: '' }} style={{ textDecoration: 'none' }}>
+	  <Link to={{pathname: '/', search: '?month='+this.state.month+'&year='+this.state.year}} style={{ textDecoration: 'none' }}>
 	  <span className="glyphicon glyphicon-remove"></span>
       </Link>
 	  </Button>
@@ -44,4 +54,3 @@ render(){
 }
 
 export default Delete;	
-	
