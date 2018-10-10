@@ -22,7 +22,7 @@ class MonthTabs extends React.Component {
 	}
 	
 	render() {
-		return <Tabs activeKey={this.state.activeTab} onSelect={this.handleSelect}>
+		return <Tabs activeKey={this.state.activeTab} onSelect={this.handleSelect} id="tabsID">
 				<Tab eventKey={this.props.year+'-All'} title={<MonthTabsRouter tabId='All' year={this.props.year}/>}></Tab>
 				<Tab eventKey={this.props.year+'-Jan'} title={<MonthTabsRouter tabId='Jan' year={this.props.year}/>}></Tab>
 				<Tab eventKey={this.props.year+'-Feb'} title={<MonthTabsRouter tabId='Feb' year={this.props.year}/>}></Tab>

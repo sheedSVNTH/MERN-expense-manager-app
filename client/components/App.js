@@ -22,6 +22,7 @@ export default class App extends React.Component {
 			activeTab: 2018
 					 };
 		this.getData = this.getData.bind(this);
+		this.handleSelect = this.handleSelect.bind(this);
 	}
 		
 		componentWillReceiveProps(nextProps) {

@@ -7,7 +7,7 @@ class YearTabsRouter extends React.Component {
 	constructor() {
 		super();
 		this.state= {
-			style: {'font-size': '16px'}
+			style: {'fontSize': '16px'}
 		};
 		}
 	render() {

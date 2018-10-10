@@ -11028,7 +11028,7 @@ var YearTabsRouter = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (YearTabsRouter.__proto__ || Object.getPrototypeOf(YearTabsRouter)).call(this));
 
 		_this.state = {
-			style: { 'font-size': '16px' }
+			style: { 'fontSize': '16px' }
 		};
 		return _this;
 	}
@@ -34907,6 +34907,7 @@ var App = function (_React$Component) {
 			activeTab: 2018
 		};
 		_this.getData = _this.getData.bind(_this);
+		_this.handleSelect = _this.handleSelect.bind(_this);
 		return _this;
 	}
 
@@ -36234,16 +36235,6 @@ var Add = function (_React$Component) {
 								{ id: 'year', name: 'year', value: this.state.year, onChange: this.handleSelectChange },
 								_react2.default.createElement(
 									'option',
-									{ value: '2016', id: '16' },
-									'2016'
-								),
-								_react2.default.createElement(
-									'option',
-									{ value: '2017', id: '17' },
-									'2017'
-								),
-								_react2.default.createElement(
-									'option',
 									{ value: '2018', id: '18' },
 									'2018'
 								),
@@ -36256,6 +36247,16 @@ var Add = function (_React$Component) {
 									'option',
 									{ value: '2020', id: '20' },
 									'2020'
+								),
+								_react2.default.createElement(
+									'option',
+									{ value: '2021', id: '21' },
+									'2021'
+								),
+								_react2.default.createElement(
+									'option',
+									{ value: '2022', id: '22' },
+									'2022'
 								)
 							)
 						),
@@ -48345,7 +48346,7 @@ var MonthTabs = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				_reactBootstrap.Tabs,
-				{ activeKey: this.state.activeTab, onSelect: this.handleSelect },
+				{ activeKey: this.state.activeTab, onSelect: this.handleSelect, id: 'tabsID' },
 				_react2.default.createElement(_reactBootstrap.Tab, { eventKey: this.props.year + '-All', title: _react2.default.createElement(_monthTabsRouter2.default, { tabId: 'All', year: this.props.year }) }),
 				_react2.default.createElement(_reactBootstrap.Tab, { eventKey: this.props.year + '-Jan', title: _react2.default.createElement(_monthTabsRouter2.default, { tabId: 'Jan', year: this.props.year }) }),
 				_react2.default.createElement(_reactBootstrap.Tab, { eventKey: this.props.year + '-Feb', title: _react2.default.createElement(_monthTabsRouter2.default, { tabId: 'Feb', year: this.props.year }) }),
@@ -48407,7 +48408,7 @@ var MonthTabsRouter = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (MonthTabsRouter.__proto__ || Object.getPrototypeOf(MonthTabsRouter)).call(this));
 
-		_this.state = { style: { 'font-size': '10px' } };
+		_this.state = { style: { 'fontSize': '10px' } };
 		return _this;
 	}
 
